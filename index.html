@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <!-- Landing Screen -->
+    <section id="landing-screen" class="landing-screen">
+        <div class="landing-content">
+            <div class="landing-badge">STAY ACTIVE, STAY HEALTHY</div>
+            <h1>Track Your Fitness <br><span class="highlight">Journey</span> Today</h1>
+            <p>Monitor your progress, set ambitious goals, and achieve the best version of yourself with our powerful tracker.</p>
+            <button id="track-now-btn" class="submit-btn primary-gradient">Track Now <i data-lucide="arrow-right"></i></button>
+        </div>
+        <div class="landing-visual">
+            <div class="floating-card c1"><i data-lucide="flame"></i> 450 kcal</div>
+            <div class="floating-card c2"><i data-lucide="timer"></i> 45 min</div>
+            <div class="floating-card c3"><i data-lucide="dumbbell"></i> Workout</div>
+        </div>
+    </section>
+
+    <!-- Main App Content (Initially Hidden) -->
+    <div id="main-app" style="display: none;">
+        <nav class="navbar">
+            <div class="nav-left">
+                <button id="back-to-landing" class="icon-btn" title="Go Back"><i data-lucide="chevron-left"></i></button>
+                <div class="logo">FITNESS TRACKER</div>
+            </div>
+            <div class="goal-indicator">
+                Daily Goal: <span id="goal-display">2000</span> kcal
+                <button id="edit-goal-btn" class="icon-btn">✎</button>
+            </div>
+        </nav>
+
+        <main class="dashboard">
+            <section class="overview-cards">
+                <div class="card stat-card primary">
+                    <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+                        <div class="card-title">
+                            <h3><i data-lucide="flame"
+                                    style="color: #ef4444; vertical-align: middle; margin-right: 5px;"></i> Today's Burned
+                            </h3>
+                            <p id="today-calories" class="stat-value">0</p>
+                            <small>kcal</small>
+                        </div>
+                        <div class="progress-circle" id="progressCircle">
+                            <span id="progressText">0%</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="today-progress" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="card stat-card">
+                    <div class="card-title">
+                        <h3><i data-lucide="dumbbell"
+                                style="color: #3b82f6; vertical-align: middle; margin-right: 5px;"></i> Workouts</h3>
+                    </div>
+                    <p id="workout-count" class="stat-value">0</p>
+                    <small>Sessions Today</small>
+                </div>
+
+                <div class="card stat-card">
+                    <div class="card-title">
+                        <h3><i data-lucide="timer" style="color: #3b82f6; vertical-align: middle; margin-right: 5px;"></i>
+                            Active Time</h3>
+                    </div>
+                    <p id="active-time" class="stat-value">0</p>
+                    <small>Minutes Today</small>
+                </div>
+            </section>
+
+            <section class="main-content">
+                <div class="card chart-container">
+                    <div class="card-header">
+                        <h2 class="section-title">Weekly Progress</h2>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="weeklyChart" height="200"></canvas>
+                    </div>
+                </div>
+
+                <div class="card log-container">
+                    <div class="card-header">
+                        <h2 class="section-title">Log Workout</h2>
+                    </div>
+                    <form id="workout-form">
+                        <div class="input-group">
+                            <label for="activity">Activity</label>
+                            <select id="activity" required>
+                                <option value="" disabled selected>Select Activity</option>
+                                <option value="Running">🏃 Running</option>
+                                <option value="Cycling">🚴 Cycling</option>
+                                <option value="Swimming">🏊 Swimming</option>
+                                <option value="Weightlifting">🏋️ Weightlifting</option>
+                                <option value="Yoga">🧘 Yoga</option>
+                                <option value="Walking">🚶 Walking</option>
+                                <option value="High Intensity (HIIT)">🔥 HIIT</option>
+                                <option value="Other">✨ Other</option>
+                            </select>
+                        </div>
+                        <div class="input-group row">
+                            <div class="col">
+                                <label for="duration">Duration (min)</label>
+                                <input type="number" id="duration" placeholder="30" required>
+                            </div>
+                            <div class="col">
+                                <label for="calories">Calories (kcal)</label>
+                                <input type="number" id="calories" placeholder="300" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-btn">Log Activity</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="history-section card">
+                <div class="card-header">
+                    <h2 class="section-title">Recent Activity</h2>
+                    <button id="clear-all" class="text-btn">Clear All</button>
+                </div>
+                <div class="history-list" id="history-list">
+                    <p id="emptyState" class="empty-msg">No activity yet. Let’s get moving 💪</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Goal Editor Modal -->
+        <div id="goal-modal" class="modal">
+            <div class="modal-content card">
+                <h2>Set Daily Calorie Goal</h2>
+                <div class="input-group">
+                    <input type="number" id="new-goal-input" placeholder="e.g. 2500">
+                </div>
+                <div class="modal-actions">
+                    <button id="cancel-goal" class="text-btn">Cancel</button>
+                    <button id="save-goal" class="submit-btn small">Save Goal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
