@@ -9,6 +9,17 @@ class StriveApp {
         this.goal = parseInt(localStorage.getItem('strive_goal')) || 2000;
         this.chart = null;
 
+        this.calorieRates = {
+            "Running": 10,
+            "Walking": 4,
+            "Cycling": 8,
+            "Weightlifting": 6,
+            "Swimming": 9,
+            "Yoga": 3,
+            "High Intensity (HIIT)": 12,
+            "Other": 5
+        };
+
         this.initElements();
         // Skip initChart in constructor to avoid issues with hidden canvas
         this.initEventListeners();
@@ -30,6 +41,7 @@ class StriveApp {
         this.progressText = document.getElementById('progressText');
         this.emptyState = document.getElementById('emptyState');
         this.historyList = document.getElementById('history-list');
+        this.calorieInfo = document.getElementById('calorieInfo');
 
         this.goalModal = document.getElementById('goal-modal');
         this.newGoalInput = document.getElementById('new-goal-input');
@@ -49,6 +61,10 @@ class StriveApp {
             e.preventDefault();
             this.handleWorkoutSubmit();
         });
+
+        // Auto Update Calories (REAL-TIME)
+        this.activityInput.addEventListener('change', () => this.updateCalories());
+        this.durationInput.addEventListener('input', () => this.updateCalories());
 
         // Goal Modal
         this.editGoalBtn.addEventListener('click', () => {
@@ -122,10 +138,33 @@ class StriveApp {
         }
     }
 
+    updateCalories() {
+        const activity = this.activityInput.value;
+        const duration = parseInt(this.durationInput.value) || 0;
+        
+        const rate = this.calorieRates[activity] || 0;
+        const calories = rate * duration;
+        
+        this.caloriesInput.value = calories > 0 ? calories : "";
+
+        // Show info text
+        if (rate > 0) {
+            const target = 1000;
+            const requiredTime = Math.ceil(target / rate);
+            this.calorieInfo.style.display = 'block';
+            this.calorieInfo.innerHTML = `<strong>${activity}</strong> burns <strong>${rate} kcal/min</strong>.<br>To reach a <strong>${target} kcal</strong> goal, you need ~<strong>${requiredTime} mins</strong>.`;
+        } else {
+            this.calorieInfo.style.display = 'none';
+        }
+    }
+
     handleWorkoutSubmit() {
         const activity = this.activityInput.value;
         const duration = parseInt(this.durationInput.value);
-        const calories = parseInt(this.caloriesInput.value);
+        
+        // Ensure final calculation is used instead of just UI value
+        const rate = this.calorieRates[activity] || 0;
+        const calories = rate * duration;
 
         const workout = {
             id: Date.now(),
@@ -141,6 +180,7 @@ class StriveApp {
         
         // Reset Form
         this.workoutForm.reset();
+        this.updateCalories(); // Clear calculated value
     }
 
     saveData() {

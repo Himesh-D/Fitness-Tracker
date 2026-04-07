@@ -3,41 +3,36 @@
 A sleek, local-first web application designed to help you track your daily workouts, monitor calories burned, and achieve your fitness goals with a premium, responsive experience.
 
 ## 🔗 Live Demo
-[View the Live Application](https://fitness-tracker-app-flame-chi.vercel.app/)
+[Access the Live Application](https://fitness-tracker-app-flame-chi.vercel.app/)
 
+## 🌟 Key Features
 
-
-
-## 🌟 Features
-
-- **🚀 Interactive Landing Page**: A high-end hero section with floating stat previews to welcome you.
-- **📊 Dynamic Progress Ring**: A visual circular indicator of your daily calorie progress compared to your goal.
-- **📈 Weekly Evolution Charts**: Beautifully animated bar charts (via Chart.js) showing your burn trends over the last 7 days.
-- **💪 Instant Logging**: Quickly recorded activities with duration and calorie details.
-- **🛡️ Local-First Storage**: Your data stays private on your machine using browser LocalStorage—no account needed.
-- **🎨 Modern Aesthetic**: Built with a custom design system featuring smooth gradients, glassmorphism, and Outfit typography.
-- **📱 Fully Responsive**: Seamlessly transitions from a 2-column desktop grid to a mobile-friendly stack.
+- **🚀 Interactive Landing Page**: A high-end hero section with floating stat previews and smooth transitions.
+- **⚡ Smart Calorie Engine**: Automatically calculates calories burned based on exercise type and duration.
+- **💡 Activity Insights**: Real-time feedback on burn rates and time estimates to reach calorie goals.
+- **📊 Dynamic Progress Ring**: A visual circular indicator of your daily progress against goals.
+- **📈 Evolution Charts**: Beautifully animated data visualization of your 7-day burn trends.
+- **🛡️ Local-First Storage**: Your data remains private in your browser—no login or internet required.
+- **🎨 Premium Aesthetic**: Professional design system with glassmorphism, vibrant gradients, and custom branding.
 
 ## 🛠️ Technology Stack
 
-- **HTML5**: Semantic structure and SVG icons.
-- **CSS3**: Custom design tokens, CSS Grid/Flexbox, and keyframe animations.
-- **JavaScript (Vanilla)**: Core logic, LocalStorage management, and DOM manipulation.
-- **Chart.js**: High-performance data visualization.
-- **Lucide Icons**: Crisp, professional iconography.
+- **Frontend**: Semantic HTML5 & Vanilla ES6+ JavaScript.
+- **Styling**: Modern CSS3 using Grid, Flexbox, and Custom Properties.
+- **Visuals**: Chart.js for data visualization & Lucide Icons for crisp UI elements.
+- **Storage**: LocalStorage for fast, persistent data management.
 
 ## 🚀 Getting Started
 
 1.  Clone or download this repository.
 2.  Open `index.html` in any modern web browser.
-3.  Click **"Track Now"** to enter your dashboard.
-4.  Log Your first activity!
+3.  Click **"Track Now"** to enter your dashboard and start logging activities!
 
 ## 💡 Usage Tips
 
-- **Set Your Goal**: Click the ✎ icon next to the daily calorie goal to adjust your target.
-- **Review History**: Scroll through "Recent Activity" to see past sessions.
-- **Clear Data**: Use the "Clear All" button in the history section to reset your progress if needed.
+- **Auto-Fill**: Just select an activity and duration; the calories will calculate for you.
+- **Set Your Goal**: Use the ✎ icon next to the daily goal to adjust your daily target.
+- **History Management**: Use "Clear All" to reset your local data at any time.
 
 ---
 
