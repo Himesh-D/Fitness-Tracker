@@ -2,7 +2,11 @@
 
 A sleek, local-first web application designed to help you track your daily workouts, monitor calories burned, and achieve your fitness goals with a premium, responsive experience.
 
-![Fitness Tracker Preview](fitness_landing_bg_1775572826379.png)
+## 🔗 Live Demo
+[View the Live Application](https://fitness-tracker-app-flame-chi.vercel.app/)
+
+
+
 
 ## 🌟 Features
 
